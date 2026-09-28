@@ -186,3 +186,10 @@ body { background: var(--lapis); color: var(--plaster); font: 400 20px/1.6 var(-
   @keyframes fizz { to { background-position: 12px -360px, 31px -410px, 70px -670px; } }
   @keyframes fizz-in { from { opacity: 0; } }
 }
+
+/* Фон секции: ИИ-текстура (Cloudflare Workers AI) под заливкой цвета сайта — декор, не фото бизнеса.
+   На компьютере картинка закреплена за окном — при прокрутке секция работает как окно (параллакс). */
+.facts { background: linear-gradient(color-mix(in srgb, var(--lapis-deep) 72%, transparent), color-mix(in srgb, var(--lapis-deep) 88%, transparent)), url('img/bg-facts.webp') center / cover var(--lapis-deep); }
+@media (hover: hover) and (pointer: fine) {
+  .facts { background-attachment: scroll, fixed; }
+}
