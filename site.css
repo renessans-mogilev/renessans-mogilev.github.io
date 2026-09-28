@@ -169,3 +169,20 @@ body { background: var(--lapis); color: var(--plaster); font: 400 20px/1.6 var(-
   .form { padding: 44px 20px 24px; border-radius: 160px 160px 12px 12px / 60px 60px 12px 12px; }
   .events, .facts, .plan, .reviews, .contacts { padding: 76px 0; }
 }
+
+/* Фишка: в арке поднимаются пузырьки шампанского. Три слоя разного размера и скорости — глубина.
+   Каждый слой сдвигается на целое число своих плиток, поэтому цикл без шва. */
+@media (prefers-reduced-motion: no-preference) {
+  .arch::after {
+    content: ''; position: absolute; inset: 14px; border-radius: 999px 999px 0 0; pointer-events: none; mix-blend-mode: screen;
+    background:
+      radial-gradient(circle, rgba(255, 238, 196, .95) 0 1.2px, rgba(233, 196, 120, .45) 2px, transparent 3px) 12px 0 / 53px 90px,
+      radial-gradient(circle, rgba(255, 238, 196, .9) 0 1.8px, rgba(233, 196, 120, .4) 3px, transparent 4.2px) 31px 40px / 97px 150px,
+      radial-gradient(circle, rgba(255, 244, 214, .85) 0 2.6px, rgba(233, 196, 120, .3) 4px, transparent 5.5px) 70px 20px / 151px 230px;
+    -webkit-mask-image: linear-gradient(to top, transparent 2%, #000 30%, #000 55%, transparent 88%);
+    mask-image: linear-gradient(to top, transparent 2%, #000 30%, #000 55%, transparent 88%);
+    animation: fizz 9s linear infinite, fizz-in 1.2s 1s both;
+  }
+  @keyframes fizz { to { background-position: 12px -360px, 31px -410px, 70px -670px; } }
+  @keyframes fizz-in { from { opacity: 0; } }
+}
